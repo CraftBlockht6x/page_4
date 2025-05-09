@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1000" width="900" height="1000">
+  <defs>
+    <style>
+      .line { stroke: #8b5a2b; stroke-width: 2; }
+      .thin-line { stroke: #8b5a2b; stroke-width: 1; }
+      /* .border removed */
+      .river-bg { fill: rgba(170, 190, 210, 0.3); }
+      .river-text { font-family: 'KaiTi', 'SimSun', serif; font-size: 48px; font-weight: bold; fill: #6b7a8c; text-anchor: middle; dominant-baseline: central; letter-spacing: 0.5em;}
+      .marker { stroke: #8b5a2b; stroke-width: 1.5; fill: none;} /* Added fill:none */
+    </style>
+
+    <!-- Inverted Marker (for Cannons and Inner Soldiers) -->
+    <g id="marker-inverted">
+       <polyline points="-10,-5 -5,-5 -5,-10" class="marker"/> <!-- Top-left (points inward) -->
+       <polyline points="10,-5 5,-5 5,-10" class="marker"/>   <!-- Top-right (points inward) -->
+       <polyline points="-10,5 -5,5 -5,10" class="marker"/>   <!-- Bottom-left (points inward) -->
+       <polyline points="10,5 5,5 5,10" class="marker"/>     <!-- Bottom-right (points inward) -->
+    </g>
+    <!-- Inverted Marker for Left Edge Soldiers (only right brackets, pointing inward) -->
+    <g id="marker-inverted-left-edge">
+       <polyline points="10,-5 5,-5 5,-10" class="marker"/>   <!-- Top-right (points inward) -->
+       <polyline points="10,5 5,5 5,10" class="marker"/>     <!-- Bottom-right (points inward) -->
+    </g>
+    <!-- Inverted Marker for Right Edge Soldiers (only left brackets, pointing inward) -->
+    <g id="marker-inverted-right-edge">
+       <polyline points="-10,-5 -5,-5 -5,-10" class="marker"/> <!-- Top-left (points inward) -->
+       <polyline points="-10,5 -5,5 -5,10" class="marker"/>   <!-- Bottom-left (points inward) -->
+    </g>
+  </defs>
+
+  <!-- Background Fill -->
+  <rect x="0" y="0" width="900" height="1000" fill="#e3c18f"/>
+
+  <!-- Grid Lines -->
+  <g class="lines">
+    <!-- Vertical Lines (Split at the river) -->
+    <line class="line" x1="50" y1="50" x2="50" y2="450" />
+    <line class="line" x1="50" y1="550" x2="50" y2="950" />
+    <line class="line" x1="150" y1="50" x2="150" y2="450" />
+    <line class="line" x1="150" y1="550" x2="150" y2="950" />
+    <line class="line" x1="250" y1="50" x2="250" y2="450" />
+    <line class="line" x1="250" y1="550" x2="250" y2="950" />
+    <line class="line" x1="350" y1="50" x2="350" y2="450" />
+    <line class="line" x1="350" y1="550" x2="350" y2="950" />
+    <line class="line" x1="450" y1="50" x2="450" y2="450" />
+    <line class="line" x1="450" y1="550" x2="450" y2="950" />
+    <line class="line" x1="550" y1="50" x2="550" y2="450" />
+    <line class="line" x1="550" y1="550" x2="550" y2="950" />
+    <line class="line" x1="650" y1="50" x2="650" y2="450" />
+    <line class="line" x1="650" y1="550" x2="650" y2="950" />
+    <line class="line" x1="750" y1="50" x2="750" y2="450" />
+    <line class="line" x1="750" y1="550" x2="750" y2="950" />
+    <line class="line" x1="850" y1="50" x2="850" y2="450" />
+    <line class="line" x1="850" y1="550" x2="850" y2="950" />
+
+    <!-- Horizontal Lines -->
+    <line class="line" x1="50" y1="50" x2="850" y2="50" />
+    <line class="line" x1="50" y1="150" x2="850" y2="150" />
+    <line class="line" x1="50" y1="250" x2="850" y2="250" />
+    <line class="line" x1="50" y1="350" x2="850" y2="350" />
+    <line class="line" x1="50" y1="450" x2="850" y2="450" />
+    <line class="line" x1="50" y1="550" x2="850" y2="550" />
+    <line class="line" x1="50" y1="650" x2="850" y2="650" />
+    <line class="line" x1="50" y1="750" x2="850" y2="750" />
+    <line class="line" x1="50" y1="850" x2="850" y2="850" />
+    <line class="line" x1="50" y1="950" x2="850" y2="950" />
+  </g>
+
+  <!-- River -->
+  <rect class="river-bg" x="50" y="450" width="800" height="100" />
+  <text class="river-text" x="275" y="500">楚 河</text>
+  <text class="river-text" x="625" y="500">漢 界</text>
+
+  <!-- Palaces -->
+  <g class="palace-lines thin-line">
+    <line x1="350" y1="50" x2="550" y2="250" />
+    <line x1="550" y1="50" x2="350" y2="250" />
+    <line x1="350" y1="750" x2="550" y2="950" />
+    <line x1="550" y1="750" x2="350" y2="950" />
+  </g>
+
+  <!-- Markers (ALL Inverted) -->
+  <g class="markers">
+    <!-- Cannon Markers -->
+    <use href="#marker-inverted" x="150" y="250" />
+    <use href="#marker-inverted" x="750" y="250" />
+    <use href="#marker-inverted" x="150" y="750" />
+    <use href="#marker-inverted" x="750" y="750" />
+    <!-- Soldier Markers -->
+    <!-- Edge Soldiers -->
+    <use href="#marker-inverted-left-edge" x="50" y="350" />
+    <use href="#marker-inverted-right-edge" x="850" y="350" />
+    <use href="#marker-inverted-left-edge" x="50" y="650" />
+    <use href="#marker-inverted-right-edge" x="850" y="650" />
+    <!-- Inner Soldiers -->
+    <use href="#marker-inverted" x="250" y="350" />
+    <use href="#marker-inverted" x="450" y="350" />
+    <use href="#marker-inverted" x="650" y="350" />
+    <use href="#marker-inverted" x="250" y="650" />
+    <use href="#marker-inverted" x="450" y="650" />
+    <use href="#marker-inverted" x="650" y="650" />
+  </g>
+
+  <!-- Outer Border Removed -->
+  <!-- <rect class="border" x="40" y="40" width="820" height="920" rx="5" ry="5"/> -->
+</svg>
