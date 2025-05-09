@@ -1,0 +1,344 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+:root {
+--red-color: #d23;
+--black-color: #111;
+--board-color: #e8c088;
+--light-color: #f8f8f8;
+--border-color: #963;
+--highlight-color: rgba(50, 205, 50, 0.5);
+--shadow-color: rgba(0, 0, 0, 0.15);
+}
+
+body {
+background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+display: flex; 
+justify-content: center; 
+align-items: center; 
+min-height: 100vh; 
+}
+
+.game-container {
+display: flex;
+max-width: 900px;
+width: 100%;
+background-color: #fff;
+border-radius: 12px;
+padding: 1.5rem;
+gap: 1.5rem;
+margin-left: auto;   /* 新增 */
+margin-right: auto;  /* 新增 */
+}
+
+/* 设置面板样式 */
+.toggle-settings-btn {
+background-color: var(--red-color);
+color: white;
+border: none;
+
+}
+
+.toggle-settings-btn:hover {
+background-color: #b00;
+transform: translateY(-2px);
+}
+
+.settings-panel {
+flex: 0 0 280px;
+padding-right: 1rem;
+}
+
+.player-info {
+margin-bottom: 1.5rem;
+background-color: #f9f9f9;
+
+}
+
+.current-player {
+font-weight: bold;
+font-size: 1.1rem;
+min-height:1.5em;
+display: flex;
+align-items: baseline;
+}
+.player-indicator {
+padding: 0.2rem 0.5rem;
+border-radius: 4px;
+margin-right: 0.25em; /* 给红黑指示器之间一点点间距，如果它们都可见的话 */
+/* 默认情况下，它们都存在，但只有一个是“激活”的 */
+/* 我们可以通过透明度、颜色变浅或 display:none 来处理非激活状态 */
+
+/* background-color: transparent; /* 非激活时的背景 */
+transition: color 0.3s ease, background-color 0.3s ease;
+}
+/* 激活状态的样式 */
+#player-indicator-red.active {
+color: var(--red-color);
+background-color: #ffebee; 
+font-weight: bold; /* 可以加粗激活的那个 */
+}
+
+#player-indicator-black.active {
+color: var(--black-color);
+background-color: #e5e5e5; 
+font-weight: bold; 
+}
+#player-indicator-red:not(.active){opacity: 0.3;color: var(--red-color);}
+#player-indicator-black:not(.active){opacity: 0.3;color: var(--black-color);}
+#player-moves-info {
+color: #333; 
+min-width: 6em; 
+display: inline-block; 
+text-align: left; 
+}
+
+#current-player { 
+padding: 0.2rem 0.5rem;
+border-radius: 4px;
+min-width: 3em;  
+text-align: center; 
+transition: color 0.3s ease, background-color 0.3s ease; 
+}
+
+.current-player span {
+padding: 0.2rem 0.5rem;
+border-radius: 4px;
+}
+
+.game-status {
+color: #666;
+min-height: 1.2em; 
+min-width: 10em; /* 例如，足够容纳 "红方正在思考..." */
+margin-left: 0.5em; /* 如果不用gap，手动设置间距 */
+/* text-align: left; /* 默认 */
+}
+
+/* 游戏设置区域 */
+.game-info {
+background-color: #fafafa;
+border-radius: 8px;
+padding: 1rem;
+box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.setting-group {
+display: flex;
+align-items: center;
+margin-bottom: 0.8rem;
+font-size: 0.9rem;
+}
+
+.setting-group label {
+flex: 0 0 45%;
+}
+
+.setting-group select {
+flex: 1;
+padding: 0.4rem;
+border-radius: 4px;
+border: 1px solid #ddd;
+outline: none;
+background-color: white;
+}
+
+button {
+background-color: var(--red-color);
+color: white;
+border: none;
+padding: 0.5rem 1rem;
+margin: 0.3rem;
+border-radius: 4px;
+cursor: pointer;
+font-size: 0.9rem;
+transition: all 0.2s ease;
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+button:hover {
+background-color: #b00;
+transform: translateY(-2px);
+box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.game-controls {
+display: flex;
+justify-content: center;
+margin-top: 1.5rem;
+}
+
+/* 让子设置 */
+.handicap-settings {
+background-color: #f8f8f8;
+border-radius: 8px;
+padding: 1rem;
+margin: 1rem 0;
+border: 1px solid #eee;
+}
+
+.handicap-group {
+margin-bottom: 1rem;
+}
+
+.handicap-group h4 {
+font-size: 0.9rem;
+color: #555;
+margin-bottom: 0.5rem;
+padding-bottom: 0.3rem;
+border-bottom: 1px solid #eee;
+}
+
+.piece-selection {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 0.5rem;
+}
+
+.piece-selection label {
+display: flex;
+align-items: center;
+gap: 0.3rem;
+font-size: 0.85rem;
+color: #444;
+}
+
+/* 棋盘样式 */
+.chessboard-container {
+flex: 1;
+min-width: 300px;
+}
+
+.chessboard {
+width: 100%;
+aspect-ratio: 9/10;
+background-color: var(--board-color);
+position: relative;
+border: 3px solid var(--border-color);
+border-radius: 4px;
+box-shadow: 0 5px 15px var(--shadow-color);
+background-image: url('../m.svg'); /* Use SVG background */
+background-size: 130% 110%; /* Stretch SVG to fill container */
+background-repeat: no-repeat;
+background-position: center;
+
+}
+
+/* 棋盘网格线 */
+.chessboard::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+z-index: 1;
+}
+
+
+/* 棋子样式 */
+.chess-piece {
+width: calc(100% / 9.5);
+height: calc(100% / 10.5);
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+font-weight: bold;
+font-size: 2rem;
+cursor: pointer;
+position: absolute;
+z-index: 10;
+transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+transform: translate(-50%, -50%);
+box-shadow: 0 3px 6px var(--shadow-color);
+}
+
+.chess-piece.red {
+background: radial-gradient(circle at center, #fff, #f0e0e0);
+color: var(--red-color);
+border: 2px solid var(--red-color);
+}
+
+.chess-piece.black {
+background: radial-gradient(circle at center, #fff, #e0e0e0);
+color: var(--black-color);
+border: 2px solid var(--black-color);
+}
+
+.chess-piece.selected {
+transform: translate(-50%, -50%) scale(1.1);
+box-shadow: 0 0 0 3px var(--highlight-color), 0 5px 10px rgba(0,0,0,0.2);
+}
+
+/* 可移动位置标记 */
+.valid-move {
+position: absolute;
+width: calc(100% / 18);
+height: calc(100% / 18);
+background-color: var(--highlight-color);
+border-radius: 50%;
+z-index: 5;
+transform: translate(-50%, -50%);
+animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+0% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* 宫格标记 - 九宫格 */
+.palace-marker {
+position: absolute;
+width: 10px;
+height: 10px;
+background-color: transparent;
+border-radius: 50%;
+z-index: 2;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+.game-container {
+position: relative; 
+}
+.settings-panel {
+/* display: none; 保持默认隐藏 */
+/* flex: 0 0 100%; /* 不再需要flex属性来控制大小和位置 */
+position: absolute; /* 关键：脱离文档流 */
+top: 50%;            /* 垂直居中 */
+left: 50%;           /* 水平居中 */
+transform: translate(-50%, -50%); /* 精确居中 */
+width: 90%;          /* 或者一个合适的固定宽度，例如 max-width: 320px; */
+max-width: 400px;    /* 限制最大宽度，避免在稍大的小屏幕上过宽 */
+background-color: #fff; /* 确保有背景色覆盖下方内容 */
+padding: 1.5rem;
+border-radius: 12px;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* 增强悬浮感 */
+z-index: 100;        /* 确保在棋盘之上 */
+display: none;       /* 初始隐藏 */
+/* padding-right: 0; /* 已有padding，这个可能不需要 */
+/* margin-bottom: 1rem; /* 绝对定位，margin不再影响布局 */
+}
+
+.settings-panel.show {
+display: block;
+}
+
+.chessboard-container {
+flex: 1 0 100%;
+}
+
+.chess-piece {
+font-size: 1.5rem;
+}
+
+.chessboard::after {
+font-size: 1.2rem;
+}
+}
