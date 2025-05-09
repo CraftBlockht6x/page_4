@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国象棋</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="game-container">
+        <div class="settings-panel">
+            <div class="game-info">
+                <div class="move-settings">
+                    <div class="setting-group">
+                        <label>红方连续步数：</label>
+                        <select id="red-moves">
+                            <option value="1">1步</option>
+                            <option value="2">2步</option>
+                            <option value="3">3步</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label>黑方连续步数：</label>
+                        <select id="black-moves">
+                            <option value="1">1步</option>
+                            <option value="2">2步</option>
+                            <option value="3">3步</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="handicap-settings">
+                    <div class="handicap-group">
+                        <h4>红方让子</h4>
+                        <div class="piece-selection">
+                            <label><input type="checkbox" data-color="red" data-type="chariot" data-index="0"> 让左车</label>
+                            <label><input type="checkbox" data-color="red" data-type="chariot" data-index="1"> 让右车</label>
+                            <label><input type="checkbox" data-color="red" data-type="horse" data-index="0"> 让左马</label>
+                            <label><input type="checkbox" data-color="red" data-type="horse" data-index="1"> 让右马</label>
+                            <label><input type="checkbox" data-color="red" data-type="cannon" data-index="0"> 让左炮</label>
+                            <label><input type="checkbox" data-color="red" data-type="cannon" data-index="1"> 让右炮</label>
+                        </div>
+                    </div>
+                    <div class="handicap-group">
+                        <h4>黑方让子</h4>
+                        <div class="piece-selection">
+                            <label><input type="checkbox" data-color="black" data-type="chariot" data-index="0"> 让左车</label>
+                            <label><input type="checkbox" data-color="black" data-type="chariot" data-index="1"> 让右车</label>
+                            <label><input type="checkbox" data-color="black" data-type="horse" data-index="0"> 让左马</label>
+                            <label><input type="checkbox" data-color="black" data-type="horse" data-index="1"> 让右马</label>
+                            <label><input type="checkbox" data-color="black" data-type="cannon" data-index="0"> 让左炮</label>
+                            <label><input type="checkbox" data-color="black" data-type="cannon" data-index="1"> 让右炮</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chessboard-container">
+            <div class="player-info">
+                <div class="current-player">
+                    <span id="player-indicator-red" class="player-indicator">红方</span>
+                    <span id="player-indicator-black" class="player-indicator">黑方</span>
+                    <span id="player-moves-info" class="player-moves"></span>
+                    <span class="game-status" id="game-status">请开始游戏</span>
+                </div>
+            </div>
+            <div id="chessboard" class="chessboard"></div>
+            <div class="game-controls">
+                <button id="toggle-settings" class="toggle-settings-btn">设置</button>
+                <button id="restart-btn">重新开始</button>
+                <button id="undo-btn">悔棋</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 控制显示/隐藏设置面板
+        document.getElementById('toggle-settings').addEventListener('click', function() {
+        const panel = document.querySelector('.settings-panel');
+        panel.classList.toggle('show');
+        });
+    </script>
+    <script src="js/chess-pieces.js"></script>
+    <script src="js/chess-rules.js"></script>
+    <script src="js/chess-ai.js"></script>
+    <script src="js/game.js"></script>
+</body>
+
+</html>
